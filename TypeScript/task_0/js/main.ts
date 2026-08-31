@@ -1,55 +1,49 @@
 interface Student {
-    firstName: string;
-    lastName: string;
-    age: number;
-    location: string
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
 }
 
 const student1: Student = {
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 20,
-    location: 'New York'
-}
-const student2 = {
-    firstName: 'Jane',
-    lastName: 'Doe',
-    age: 21,
-    location: 'New York'
-}
+  firstName: "Larry",
+  lastName: "Hudson",
+  age: 32,
+  location: "San Francisco",
+};
 
-const studentsList: Student[] = [student1, student2];
+const student2: Student = {
+  firstName: "Karla",
+  lastName: "Dermond",
+  age: 26,
+  location: "New York",
+};
 
-// Create a table element
-const table = document.createElement('table');
+const studentsList: Array<Student> = [student1, student2];
 
-// Create a header row
-const headerRow = document.createElement('tr');
-const headers = ['First Name', 'Last Name', 'Age', 'Location'];
-headers.forEach(header => {
-    const th = document.createElement('th');
-    th.textContent = header;
-    headerRow.appendChild(th);
+const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+
+const table: HTMLTableElement = document.createElement("table");
+const thead: HTMLTableSectionElement = document.createElement("thead");
+const tbody: HTMLTableSectionElement = document.createElement("tbody");
+
+const rowHead: HTMLTableRowElement = thead.insertRow(0);
+const cell1Head: HTMLTableCellElement = rowHead.insertCell(0);
+const cell2Head: HTMLTableCellElement = rowHead.insertCell(1);
+
+cell1Head.innerHTML = "firstName";
+cell2Head.innerHTML = "location";
+
+table.append(thead);
+
+studentsList.forEach((student) => {
+  const row: HTMLTableRowElement = tbody.insertRow(0);
+  const cell1: HTMLTableCellElement = row.insertCell(0);
+  const cell2: HTMLTableCellElement = row.insertCell(1);
+
+  cell1.innerHTML = student.firstName;
+  cell2.innerHTML = student.location;
 });
 
-// Append the header row to the table
-table.appendChild(headerRow);
-
-// Create a row for each student
-studentsList.forEach(student => {
-    const row: HTMLTableRowElement = document.createElement('tr');
-    const studentValues: string[] = Object.values(student);
-    studentValues.forEach(value => {
-        const td: HTMLTableDataCellElement = document.createElement('td');
-        td.textContent = value.toString();
-        row.appendChild(td);
-    });
-    table.appendChild(row);
-});
-
-// Append the table to the body
-document.body.appendChild(table);
-
-
-
-
+table.append(tbody);
+body.append(table);
